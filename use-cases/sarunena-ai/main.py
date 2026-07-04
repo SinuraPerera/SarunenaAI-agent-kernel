@@ -2,6 +2,9 @@ from agents.weather_agent import get_weather
 from agents.disease_agent import detect_disease
 from agents.market_agent import get_market_price
 from agents.memory_agent import save_farmer, get_farmer_crop
+from agents.location_agent import get_location_coordinates
+from agents.risk_agent import calculate_risk
+from agents.recommendation_agent import get_recommendation
 
 print("🌱 SaruNena AI Started")
 
@@ -23,6 +26,21 @@ while True:
 
     print("\n--- AGENT RESPONSES ---")
 
-    print(get_weather())
+    location_name, coords = get_location_coordinates(user)
+
+    latitude, longitude = coords
+
+    temp, rain = get_weather(latitude, longitude)
+
+    print(f"📍 Location: {location_name.title()}")
+    print(f"🌡 Temperature: {temp}°C")
+    print(f"🌧 Rain: {rain} mm")
+
+    score, level = calculate_risk(user, rain)
+
+    print(f"📊 Farm Health Score: {score}/100")
+    print(level)
+    print(get_recommendation(score))
+    
     print(detect_disease(user))
     print(get_market_price(user))
