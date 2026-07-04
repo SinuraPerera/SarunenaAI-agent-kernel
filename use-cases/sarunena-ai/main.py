@@ -5,6 +5,7 @@ from agents.memory_agent import save_farmer, get_farmer_crop
 from agents.location_agent import get_location_coordinates
 from agents.risk_agent import calculate_risk
 from agents.recommendation_agent import get_recommendation
+from agents.insight_agent import get_insight
 
 print("🌱 SaruNena AI Started")
 
@@ -18,29 +19,30 @@ while True:
 
     previous_crop = get_farmer_crop(farmer_name)
 
-    if previous_crop:
-        print(f"\n👋 Welcome back {farmer_name}")
-        print(f"🌱 Last crop discussed: {previous_crop}")
-
-    save_farmer(farmer_name, user)
-
-    print("\n--- AGENT RESPONSES ---")
-
-    location_name, coords = get_location_coordinates(user)
-
-    latitude, longitude = coords
-
-    temp, rain = get_weather(latitude, longitude)
+    print("\n🌾 =============================")
+    print("      SaruNena AI Report")
+    print("==============================")
 
     print(f"📍 Location: {location_name.title()}")
     print(f"🌡 Temperature: {temp}°C")
     print(f"🌧 Rain: {rain} mm")
 
+    print("\n🍅 Disease Analysis:")
+    print(detect_disease(user))
+
+    print("\n💰 Market Analysis:")
+    print(get_market_price(user))
+
     score, level = calculate_risk(user, rain)
 
-    print(f"📊 Farm Health Score: {score}/100")
+    print("\n📊 Risk Analysis:")
+    print(f"Score: {score}/100")
     print(level)
+
+    print("\n💡 Recommendation:")
     print(get_recommendation(score))
-    
-    print(detect_disease(user))
-    print(get_market_price(user))
+
+    print("\n🧠 AI Insight:")
+    print(get_insight(user, score, rain))
+
+    print("==============================\n")

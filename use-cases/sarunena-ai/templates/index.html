@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SaruNena AI</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>🌱 SaruNena AI</h1>
+    <p>Smart Farming Assistant for Sri Lanka</p>
+
+    <form method="POST">
+        <input type="text" name="input" placeholder="e.g. tomato in kandy" required>
+        <button type="submit">Analyze</button>
+    </form>
+
+    {% if result %}
+
+    <div class="card">
+        <h2>📍 Location: {{ result.location }}</h2>
+        <p>🌡 Temperature: {{ result.temp }}°C</p>
+        <p>🌧 Rain: {{ result.rain }} mm</p>
+
+        <hr>
+
+        <p>🍅 Disease: {{ result.disease }}</p>
+        <p>💰 Market: {{ result.market }}</p>
+
+        <hr>
+
+        <p>📊 Risk Score: {{ result.risk_score }}/100</p>
+        <p>{{ result.risk_level }}</p>
+
+        <p>💡 Recommendation: {{ result.recommendation }}</p>
+        <p>🧠 Insight: {{ result.insight }}</p>
+    </div>
+
+    {% endif %}
+
+</div>
+
+</body>
+</html>
