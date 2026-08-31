@@ -6,7 +6,11 @@
   </picture>
 </p>
 
-<h3 align="center">The Operating System for Scalable &amp; Compliant Enterprise AI Agents</h3>
+<p align="center">
+  <img src="use-cases\sarunena-ai\logo.png" width="150" alt="SaruNena AI Logo">
+</p>
+
+<h3 align="center">The Operating System for Scalable &amp; Compliant Enterprise AI Agents | SarunenaAI</h3>
 
 <p align="center">
   Run, orchestrate, and deploy production AI agents at scale — across frameworks and clouds — without lock-in, rewrites, or fragile glue code.
@@ -228,3 +232,263 @@ http://www.apache.org/licenses/LICENSE-2.0
 Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
 
 SPDX-License-Identifier: Apache-2.0
+
+---
+
+# 🌱 SaruNena AI
+
+### Smart Agriculture. Smarter Future.
+
+**SaruNena AI** is a multilingual, multi-agent artificial intelligence platform designed to empower Sri Lankan farmers with intelligent, accessible, and data-driven agricultural assistance.
+
+The platform combines specialized AI agents to analyze farming conditions, weather, crop diseases, market prices, risks, and farmer-specific information to provide practical recommendations.
+
+> **Helping farmers make smarter decisions with AI.**
+
+<p align="center">
+  <img src="use-cases\sarunena-ai\logo.png" width="150" alt="SaruNena AI Logo">
+</p>
+
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/static/img/branding/agent-kernel-lockup-dark.svg">
+    <source media="(prefers-color-scheme: light)" srcset="docs/static/img/branding/agent-kernel-lockup-light.svg">
+    <img src="docs/static/img/branding/agent-kernel-lockup-dark.svg" alt="Agent Kernel" width="420" />
+  </picture>
+</p>
+
+---
+
+## 🚀 Key Features
+
+* 🌾 **Smart Farming Assistant** — AI-powered answers to agricultural questions
+* 🌦️ **Weather Intelligence** — Weather-based farming insights and alerts
+* 🦠 **Disease Detection** — Identify potential crop diseases and provide guidance
+* 💰 **Market Intelligence** — Access crop market-price information
+* ⚠️ **Risk Assessment** — Identify potential agricultural risks
+* 🧠 **Personalized Recommendations** — Suggestions based on crop, location, weather, and farmer context
+* 💾 **Farmer Memory** — Maintains relevant farmer information for personalized interactions
+* 🌍 **Multilingual Support** — Sinhala 🇱🇰, Tamil 🇱🇰, and English
+* 🤖 **Multi-Agent Architecture** — Multiple specialized AI agents collaborate to generate better insights
+
+---
+
+## 🧠 Multi-Agent Architecture
+
+SaruNena AI uses a collection of specialized agents, with each agent focusing on a particular agricultural intelligence task.
+
+```text
+                         👨‍🌾 Farmer
+                             │
+                             ▼
+                     ┌─────────────────┐
+                     │   SaruNena AI   │
+                     │   AI Orchestrator│
+                     └────────┬────────┘
+                              │
+       ┌──────────────────────┼──────────────────────┐
+       │          │            │          │            │
+       ▼          ▼            ▼          ▼            ▼
+  🧠 Memory   📍 Location   🌦️ Weather  🦠 Disease   💰 Market
+   Agent        Agent         Agent       Agent       Agent
+       │          │            │          │            │
+       └──────────┴────────────┼──────────┴────────────┘
+                              │
+                              ▼
+                       ⚠️ Risk Agent
+                              │
+                              ▼
+                  💡 Recommendation Agent
+                              │
+                              ▼
+                    📊 Agricultural Insight
+                              │
+                              ▼
+                         👨‍🌾 Farmer
+```
+
+### 🤖 Core Agents
+
+| Agent                   | Responsibility                                     |
+| ----------------------- | -------------------------------------------------- |
+| 🧠 Memory Agent         | Stores and retrieves relevant farmer context       |
+| 📍 Location Agent       | Handles location-specific agricultural information |
+| 🌦️ Weather Agent       | Provides weather intelligence and forecasts        |
+| 🦠 Disease Agent        | Analyzes potential crop diseases                   |
+| 💰 Market Agent         | Provides crop market-price intelligence            |
+| ⚠️ Risk Agent           | Evaluates agricultural risks                       |
+| 💡 Recommendation Agent | Generates personalized farming recommendations     |
+
+---
+
+## 🌍 Multilingual Agriculture
+
+SaruNena AI is designed with Sri Lankan farmers in mind.
+
+The platform supports:
+
+* 🇱🇰 **සිංහල (Sinhala)**
+* 🇱🇰 **தமிழ் (Tamil)**
+* 🌐 **English**
+
+This helps make advanced AI technology more accessible to farmers regardless of their preferred language.
+
+---
+
+## 💡 Example Use Case
+
+A farmer can provide information such as:
+
+```text
+Crop: Tomato
+Location: Maharagama
+```
+
+SaruNena AI can then combine information from multiple agents to generate insights such as:
+
+```text
+🌦️ Weather Insight
+Current and upcoming weather conditions
+
+🦠 Disease Insight
+Potential tomato diseases and prevention guidance
+
+💰 Market Insight
+Relevant tomato market-price information
+
+⚠️ Risk Assessment
+Potential weather and crop-related risks
+
+💡 Recommendation
+Personalized actions the farmer can consider
+```
+
+Instead of relying on a single AI response, the system brings together specialized agricultural intelligence.
+
+---
+
+## 🛠️ Technology Stack
+
+### AI & Backend
+
+* 🐍 Python
+* 🤖 Agent-based AI architecture
+* 🧠 Large Language Models
+* 🔗 Agent Kernel
+
+### Frontend
+
+* ⚛️ React
+* 🌐 HTML
+* 🎨 CSS
+* ⚡ JavaScript
+
+### Data & APIs
+
+* 🌦️ Weather APIs
+* 💰 Agricultural market data
+* 🗃️ Farmer memory/context data
+
+### Development & Deployment
+
+* Git
+* GitHub
+* VS Code
+* Vercel
+
+---
+
+## ⚙️ How It Works
+
+```text
+1. 👨‍🌾 Farmer provides a question or farming information
+                    ↓
+2. 🧠 SaruNena AI understands the request
+                    ↓
+3. 🤖 Relevant specialized agents are activated
+                    ↓
+4. 📊 Agents collect and analyze information
+                    ↓
+5. 🔄 Results are combined
+                    ↓
+6. 💡 Recommendation Agent generates useful insights
+                    ↓
+7. 👨‍🌾 Farmer receives an understandable response
+```
+
+---
+
+## 🎯 Problem
+
+Many farmers face difficulties accessing timely and reliable agricultural information.
+
+Important decisions can depend on:
+
+* Weather conditions
+* Crop diseases
+* Market prices
+* Location
+* Environmental risks
+* Farming experience
+
+Information may also be difficult to access when it is not available in the farmer's preferred language.
+
+---
+
+## 💚 Our Solution
+
+SaruNena AI brings these different sources of agricultural intelligence together through a unified AI platform.
+
+Instead of asking farmers to search through multiple services, SaruNena AI aims to provide:
+
+> **The right agricultural insight, at the right time, in the right language.**
+
+---
+
+## 🌱 Vision
+
+Our vision is to build an intelligent agricultural ecosystem where every farmer can access modern AI-powered decision support regardless of their technical knowledge or preferred language.
+
+### Our goal
+
+**Empower Sri Lankan farmers with accessible, intelligent, and personalized agricultural technology.**
+
+---
+
+## 🔮 Future Roadmap
+
+* 📷 AI-powered crop image analysis
+* 🌱 Crop recommendation based on soil and environmental conditions
+* 🛰️ Satellite and remote-sensing integration
+* 🌡️ IoT-based field monitoring
+* 📈 Advanced crop-price prediction
+* 🔔 Personalized farming alerts
+* 🗺️ Regional agricultural intelligence
+* 🎙️ Voice-based farming assistant
+* 📱 Mobile application
+* 🤝 Farmer community knowledge sharing
+
+---
+
+## 🏆 Project
+
+**SaruNena AI** was developed as an AI-powered agricultural intelligence solution using a multi-agent architecture.
+
+The project focuses on applying AI to a real-world challenge in Sri Lanka: **making agricultural knowledge more accessible and actionable for farmers.**
+
+---
+
+## 👨‍💻 Developed by
+
+**Team SVD Synapse**: - <br>**Sinura Perera**<br>
+                        **Vihas Kodithuwakku**
+                        
+---
+
+<div align="center">
+
+### 🌱 SaruNena AI
+
+**Smart Agriculture. Smarter Future.**
+
+</div>
