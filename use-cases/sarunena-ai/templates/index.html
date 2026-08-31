@@ -1,46 +1,241 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>SaruNena AI</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SaruNena AI - Smart Farming Assistant</title>
+    <link rel="icon" type="image/png" href="/static/logo.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="/static/style.css">
 </head>
 
 <body>
 
-<div class="container">
+<!-- Loading Indicator -->
+<div id="loadingOverlay" class="loading-overlay" style="display: none;">
+    <div class="loader">
+        <i class="fas fa-spinner"></i>
+        <p>Analyzing your farm...</p>
+    </div>
+</div>
 
-    <h1>🌱 SaruNena AI</h1>
-    <p>Smart Farming Assistant for Sri Lanka</p>
+<div class="hero">
+    <div class="hero-content">
+        <div class="logo-container">
+            <img src="/static/logo.png" alt="SaruNena AI Logo" class="logo">
+        </div>
+        <div class="badge">
+            <i class="fas fa-leaf"></i> AI-Powered Agriculture
+        </div>
+        <h1>SaruNena AI</h1>
+        <p>Smart Farming Assistant for Sri Lanka</p>
+        
+        <!-- Error Alert -->
+        {% if error %}
+        <div class="alert alert-error" id="errorAlert">
+            <i class="fas fa-exclamation-circle"></i>
+            <span>{{ error }}</span>
+            <button type="button" onclick="document.getElementById('errorAlert').style.display='none'">×</button>
+        </div>
+        {% endif %}
+        
+        <form method="POST" class="search-form" id="analysisForm" onsubmit="handleFormSubmit(event)">
+            <div class="input-group">
+                <i class="fas fa-search"></i>
+                <input 
+                    type="text" 
+                    name="input" 
+                    id="queryInput"
+                    placeholder="e.g. tomato in kandy with yellowing leaves" 
+                    maxlength="500"
+                    required
+                    minlength="3">
+                <button type="submit" id="analyzeBtn"><i class="fas fa-chart-line"></i> Analyze</button>
+            </div>
+            <small class="form-hint">Enter your crop name, location, and any visible symptoms</small>
+            <div class="stats">
+                <div class="stat">
+                    <h3>8</h3>
+                    <p>AI Agents</p>
+                </div>
 
-    <form method="POST">
-        <input type="text" name="input" placeholder="e.g. tomato in kandy" required>
-        <button type="submit">Analyze</button>
-    </form>
+                <div class="stat">
+                    <h3>24/7</h3>
+                    <p>Monitoring</p>
+                </div>
 
-    {% if result %}
+                <div class="stat">
+                    <h3>Real-Time</h3>
+                    <p>Weather Data</p>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
 
-    <div class="card">
-        <h2>📍 Location: {{ result.location }}</h2>
-        <p>🌡 Temperature: {{ result.temp }}°C</p>
-        <p>🌧 Rain: {{ result.rain }} mm</p>
+<!-- History Panel -->
+{% if history and history|length > 0 %}
+<div class="history-panel">
+    <div class="history-header">
+        <h3><i class="fas fa-history"></i> Your Recent Analyses</h3>
+        <button class="btn-small" onclick="clearHistory()">Clear</button>
+    </div>
+    <div class="history-list">
+        {% for item in history|reverse %}
+        <div class="history-item">
+            <div class="history-meta">
+                <strong>{{ item.crop }}</strong> in {{ item.location }}
+            </div>
+            <div class="history-risk risk-{{ item.risk_score|string }}">
+                Risk: {{ item.risk_score }}/100
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
 
-        <hr>
+{% if result %}
 
-        <p>🍅 Disease: {{ result.disease }}</p>
-        <p>💰 Market: {{ result.market }}</p>
-
-        <hr>
-
-        <p>📊 Risk Score: {{ result.risk_score }}/100</p>
-        <p>{{ result.risk_level }}</p>
-
-        <p>💡 Recommendation: {{ result.recommendation }}</p>
-        <p>🧠 Insight: {{ result.insight }}</p>
+<div class="dashboard">
+    <div class="dashboard-header">
+        <h2><i class="fas fa-tachometer-alt"></i> Crop Analysis Dashboard</h2>
+        <p>Location: {{ result.location }} | Crop: {{ result.crop }}</p>
+        <small>Analysis timestamp: {{ now.strftime('%Y-%m-%d %H:%M:%S') if now else 'Just now' }}</small>
     </div>
 
-    {% endif %}
+    <div class="summary-card">
+        <h2>📊 AI Farming Summary</h2>
+        <p>{{ result.insight }}</p>
+    </div>
 
+    <div class="agent-activity">
+        <h3><i class="fas fa-robot"></i> Multi-Agent Analysis</h3>
+        <div class="agent-list">
+            <div class="agent-item">
+                <i class="fas fa-check-circle"></i> Location Agent: {{ result.location }}
+            </div>
+            <div class="agent-item">
+                <i class="fas fa-check-circle"></i> Weather Agent: {{ result.temp }}°C, {{ result.rain }}mm rain
+            </div>
+            <div class="agent-item">
+                <i class="fas fa-check-circle"></i> Disease Agent: Risk assessment complete
+            </div>
+            <div class="agent-item">
+                <i class="fas fa-check-circle"></i> Market Agent: Price analysis complete
+            </div>
+            <div class="agent-item">
+                <i class="fas fa-check-circle"></i> Risk Agent: {{ result.risk_score }}/100 calculated
+            </div>
+            <div class="agent-item">
+                <i class="fas fa-check-circle"></i> Recommendation Agent: Advice generated
+            </div>
+        </div>
+    </div>
+
+    <div class="cards-grid">
+        <div class="card weather-card">
+            <div class="card-icon">
+                <i class="fas fa-cloud-sun"></i>
+            </div>
+            <h3>Weather Conditions</h3>
+            <div class="metric">
+                <span class="value">{{ result.temp }}°C</span>
+                <span class="label">Temperature</span>
+            </div>
+            <div class="metric">
+                <span class="value">{{ result.rain }} mm</span>
+                <span class="label">Rainfall</span>
+            </div>
+            <small class="weather-detail">{{ result.weather_detail | truncate(100) if result.weather_detail else '' }}</small>
+        </div>
+
+        <div class="card disease-card">
+            <div class="card-icon">
+                <i class="fas fa-bug"></i>
+            </div>
+            <h3>Disease Risk Analysis</h3>
+            <p>{{ result.disease | truncate(150) }}</p>
+        </div>
+
+        <div class="card market-card">
+            <div class="card-icon">
+                <i class="fas fa-coins"></i>
+            </div>
+            <h3>Market Intelligence</h3>
+            <p>{{ result.market | truncate(150) }}</p>
+        </div>
+
+        <div class="card risk-card">
+            <div class="card-icon">
+                <i class="fas fa-exclamation-triangle"></i>
+            </div>
+            <h3>Comprehensive Risk Assessment</h3>
+            <div class="risk-score">
+                <span class="score">{{ result.risk_score }}/100</span>
+                <span class="level {{ result.risk_class }}">{{ result.risk_level }}</span>
+            </div>
+            <div class="risk-progress">
+                <div class="risk-progress-bar risk-{{ result.risk_class }}" style="width: {{ result.risk_score }}%"></div>
+            </div>
+            <small>{{ result.risk_detail | truncate(100) if result.risk_detail else '' }}</small>
+        </div>
+
+        <div class="card recommendation-card">
+            <div class="card-icon">
+                <i class="fas fa-lightbulb"></i>
+            </div>
+            <h3>Actionable Recommendation</h3>
+            <p>{{ result.recommendation }}</p>
+        </div>
+
+        <div class="card insight-card">
+            <div class="card-icon">
+                <i class="fas fa-brain"></i>
+            </div>
+            <h3>AI-Powered Insight</h3>
+            <p>{{ result.insight }}</p>
+        </div>
+    </div>
+
+    {% if result.llm_response %}
+    <div class="llm-response-card">
+        <h3><i class="fas fa-robot"></i> Multi-Agent LLM Response</h3>
+        <p>{{ result.llm_response }}</p>
+    </div>
+    {% endif %}
 </div>
+
+{% endif %}
+
+<footer class="footer">
+    <p>&copy; 2026 SV Synapse. Made with love for Idealize 2026 Mini Competition</p>
+</footer>
+
+<script>
+function handleFormSubmit(event) {
+    const input = document.getElementById('queryInput');
+    if (!input.value.trim() || input.value.trim().length < 3) {
+        event.preventDefault();
+        return false;
+    }
+    document.getElementById('loadingOverlay').style.display = 'flex';
+    document.getElementById('analyzeBtn').disabled = true;
+    return true;
+}
+
+async function clearHistory() {
+    try {
+        const response = await fetch('/api/clear-history', { method: 'POST' });
+        const data = await response.json();
+        if (data.success) {
+            window.location.reload();
+        }
+    } catch (err) {
+        console.error('Failed to clear history:', err);
+    }
+}
+</script>
 
 </body>
 </html>

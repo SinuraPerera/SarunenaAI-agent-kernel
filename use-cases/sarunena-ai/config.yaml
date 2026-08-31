@@ -1,0 +1,52 @@
+# SaruNena AI Configuration
+# Agent Kernel configuration for multi-agent farming system
+
+# Session configuration
+session:
+  store_type: in_memory  # Options: in_memory, redis, dynamodb, cosmosdb
+  ttl: 86400  # Session time-to-live in seconds (24 hours)
+
+# API configuration
+api:
+  openai:
+    api_key: ${OPENAI_API_KEY}  # Set via environment variable
+    model: gpt-4o-mini  # Model to use for agents
+
+# WhatsApp integration configuration
+whatsapp:
+  enabled: true
+  phone_number_id: ${WHATSAPP_PHONE_NUMBER_ID}
+  access_token: ${WHATSAPP_ACCESS_TOKEN}
+  verify_token: ${WHATSAPP_VERIFY_TOKEN}
+  webhook_url: /webhook/whatsapp
+
+# SaruNena-specific configuration
+sarunena:
+  default_location: "Colombo, Sri Lanka"
+  supported_crops:
+    - tomato
+    - rice
+    - chili
+    - carrot
+    - potato
+    - onion
+    - cabbage
+    - banana
+    - coconut
+    - tea
+  
+  # External API configurations
+  weather:
+    api_url: "https://api.open-meteo.com/v1/forecast"
+    timeout: 10
+  
+  market:
+    data_source: mock  # Options: mock, api (for future integration)
+  
+  disease:
+    database_type: local  # Options: local, api (for future integration)
+
+# Logging configuration
+logging:
+  level: INFO
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
